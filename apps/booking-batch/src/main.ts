@@ -1,8 +1,8 @@
-import { NestFactory } from '@nestjs/core';
 import { BookingBatchModule } from './booking-batch.module';
+import { NestFactory } from '@nestjs/core';
 
 async function bootstrap() {
   const app = await NestFactory.create(BookingBatchModule);
-  await app.listen(process.env.port ?? 3000);
+  await app.listen(process.env.PORT_BATCH ?? 3000);
 }
 bootstrap();
