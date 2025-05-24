@@ -1,4 +1,4 @@
-import { BoardArticleCategory, BoardArticleStatus } from './../components/libs/enums/board-article.enum';
+import { BoardArticleCategory, BoardArticleStatus } from '../libs/enums/board-article.enum';
 
 import { Schema } from 'mongoose';
 

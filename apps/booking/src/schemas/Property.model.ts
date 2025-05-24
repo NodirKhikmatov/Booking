@@ -1,4 +1,4 @@
-import { PropertyLocation, PropertyStatus, PropertyType } from './../components/libs/enums/property.enum';
+import { PropertyLocation, PropertyStatus, PropertyType } from '../libs/enums/property.enum';
 
 import { Schema } from 'mongoose';
 

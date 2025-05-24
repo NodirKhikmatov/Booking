@@ -1,4 +1,4 @@
-import { NoticeCategory, NoticeStatus } from './../components/libs/enums/notice.enum';
+import { NoticeCategory, NoticeStatus } from '../libs/enums/notice.enum';
 import mongoose, { Schema } from 'mongoose';
 
 const NoticeSchema = new Schema(

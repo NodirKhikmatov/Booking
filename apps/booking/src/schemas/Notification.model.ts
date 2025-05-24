@@ -1,4 +1,4 @@
-import { NotificationGroup, NotificationStatus, NotificationType } from './../components/libs/enums/notification.enum';
+import { NotificationGroup, NotificationStatus, NotificationType } from '../libs/enums/notification.enum';
 
 import { Schema } from 'mongoose';
 
