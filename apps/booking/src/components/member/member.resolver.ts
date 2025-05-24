@@ -17,6 +17,12 @@ export class MemberResolver {
 		console.log('Mutation: login');
 		return this.memberService.login();
 	}
+	@Mutation(() => String)
+	@UsePipes(ValidationPipe)
+	public async login(@Args('input') input: LoginInput): Promise<string> {
+		console.log('Mutation: login');
+		return this.memberService.login();
+	}
 
 	@Mutation(() => String)
 	public async updateMember(): Promise<string> {
