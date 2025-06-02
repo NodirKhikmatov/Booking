@@ -12,4 +12,5 @@ export enum Message {
 	BLOCKED_USER = 'User is blocked,  please contact Restaurant!',
 	USED_NICK_PHONE = 'Nick or phone is already used!',
 	NOT_AUTHENTICATED = 'Please login first!',
+	USED_MEMBER_NICK_OR_PHONE = 'USED_MEMBER_NICK_OR_PHONE',
 }

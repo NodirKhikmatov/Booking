@@ -7,6 +7,7 @@ import { ConfigModule } from '@nestjs/config';
 import { DatabaseModule } from './database/database.module';
 import { GraphQLModule } from '@nestjs/graphql';
 import { Module } from '@nestjs/common';
+import { T } from './libs/types/common';
 
 @Module({
 	imports: [
@@ -16,6 +17,15 @@ import { Module } from '@nestjs/common';
 			playground: true,
 			uploads: false,
 			autoSchemaFile: true,
+			formatError: (error: T) => {
+				const graphQLFormattedError = {
+					code: error?.extensions.code,
+					message:
+						error?.extensions?.exception?.response?.message || error?.extensions?.response?.message || error?.message,
+				};
+				console.log('Graphql global Err:', graphQLFormattedError);
+				return graphQLFormattedError;
+			},
 		}),
 		ComponentsModule,
 		DatabaseModule,
