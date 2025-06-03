@@ -236,4 +236,12 @@ export class PropertyService {
 		}
 		return result;
 	}
+
+	public async removePropertyByAdmin(propertyId): Promise<Property> {
+		const search: T = { _id: propertyId, propertyStatus: PropertyStatus.DELETE };
+		const result = await this.propertyModel.findOneAndUpdate(search).exec();
+		if (!result) throw new InternalServerErrorException(Message.REMOVE_FAILED);
+
+		return result;
+	}
 }

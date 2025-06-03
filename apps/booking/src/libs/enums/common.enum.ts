@@ -19,6 +19,7 @@ export enum Message {
 	PROVIDE_ALLOWED_FORMAT = 'Provide onlt allowed format',
 	ONLY_SPECIFIC_ROLES_ALLOWED = 'Allowed only for members with specific roles',
 	NOT_ALLOWED_REQUEST = "NOT_ALLOWED_REQUEST",
+	REMOVE_FAILED = "REMOVE_FAILED",
 }
 
 export enum Direction {
