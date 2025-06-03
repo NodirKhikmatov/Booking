@@ -8,8 +8,8 @@ import { Roles } from '../auth/decorators/roles.decorator';
 import { MemberType } from '../../libs/enums/member.enum';
 import { RolesGuard } from '../auth/guards/roles.guard';
 import { shapeIntoMongoDbObjectId } from '../../libs/config';
-import { LoginInput, MemberInput } from '../../libs/dto/member/member.input';
-import { Member } from '../../libs/dto/member/member';
+import { AgentsInquiry, LoginInput, MemberInput } from '../../libs/dto/member/member.input';
+import { Member, Members } from '../../libs/dto/member/member';
 import { MemberUpdate } from '../../libs/dto/member/member.update';
 import { WithoutGuard } from '../auth/guards/without.guard';
 
@@ -75,6 +75,13 @@ export class MemberResolver {
 		console.log('Query: getMember');
 		const targetId = shapeIntoMongoDbObjectId(input);
 		return this.memberService.getMember(targetId, memberId);
+	}
+
+	@UseGuards(WithoutGuard)
+	@Query(() => Members)
+	public async getAgents(@Args('input') input: AgentsInquiry, @AuthMember('_id') memberId: ObjectId): Promise<Members> {
+		console.log('Query: getAgents');
+		return this.memberService.getAgents(memberId, input);
 	}
 
 	/* Admin */
