@@ -1,7 +1,7 @@
 import { Field, InputType } from '@nestjs/graphql';
 
 import { IsNotEmpty } from 'class-validator';
-import { ObjectId } from 'bson';
+import { ObjectId } from 'mongoose';
 import { ViewGroup } from '../../enums/view.enum';
 
 @InputType()

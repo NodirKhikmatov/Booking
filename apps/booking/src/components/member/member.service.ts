@@ -6,7 +6,8 @@ import { Model } from 'mongoose';
 import { Direction, Message } from '../../libs/enums/common.enum';
 import { MemberStatus, MemberType } from '../../libs/enums/member.enum';
 import { AuthService } from '../auth/auth.service';
-import { ObjectId } from 'bson';
+import { ObjectId } from 'mongoose';
+
 import { StatisticModifier, T } from '../../libs/types/common';
 import { Member, Members } from '../../libs/dto/member/member';
 import { ViewService } from '../view/view.service';
@@ -76,7 +77,7 @@ export class MemberService {
 		return result;
 	}
 
-	public async getMember(targetId: ObjectId, memberId: ObjectId): Promise<Member> {
+	public async getMember(targetId: ObjectId, memberId?: ObjectId): Promise<Member> {
 		const search: T = {
 			_id: targetId,
 			memberStatus: {

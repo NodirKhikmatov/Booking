@@ -5,7 +5,8 @@ import { MemberInput, LoginInput, AgentsInquiry, MembersInquiry } from '../../li
 import { Member, Members } from '../../libs/dto/member/member';
 import { AuthGuard } from '../auth/guards/auth.guard';
 import { AuthMember } from '../auth/decorators/authMember.decorator';
-import { ObjectId } from 'bson';
+import { ObjectId } from 'mongoose';
+
 import { Roles } from '../auth/decorators/roles.decorator';
 import { MemberType } from '../../libs/enums/member.enum';
 import { RolesGuard } from '../auth/guards/roles.guard';
