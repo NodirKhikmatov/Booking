@@ -16,5 +16,6 @@ import { ViewModule } from '../view/view.module';
 		MemberModule,
 	],
 	providers: [PropertyResolver, PropertyService],
+	exports: [PropertyService],
 })
 export class PropertyModule {}
