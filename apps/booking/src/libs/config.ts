@@ -1,6 +1,7 @@
 import * as path from 'path';
 
 import { ObjectId } from 'bson';
+import { T } from './types/common';
 // IMAGE CONFIGURATION (config.js)
 import { v4 as uuidv4 } from 'uuid';
 
@@ -26,6 +27,37 @@ export const getSerialForImage = (filename: string) => {
 
 export const shapeIntoMongoDbObjectId = (target: any) => {
 	return typeof target === 'string' ? new ObjectId(target) : target;
+};
+
+export const lookUpAuthMemberLiked = (memberId: T, targetRefId: string = '$_id') => {
+	return {
+		$lookup: {
+			from: 'likes',
+			let: {
+				localLikeRefId: targetRefId,
+				localMemberId: memberId,
+				localMyFavorite: true,
+			},
+			pipeline: [
+				{
+					$match: {
+						$expr: {
+							$and: [{ $eq: ['$likeRefId', '$$localLikeRefId'] }, { $eq: ['$memberId', '$$localMemberId'] }],
+						},
+					},
+				},
+				{
+					$project: {
+						_id: 0,
+						memberId: 1,
+						likeRefId: 1,
+						myFavorite: '$$localMyFavorite',
+					},
+				},
+			],
+			as: 'meLiked',
+		},
+	};
 };
 
 export const lookupMember = {
