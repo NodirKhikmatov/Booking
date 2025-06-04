@@ -2,7 +2,11 @@ import { Injectable, BadRequestException, InternalServerErrorException } from '@
 import { InjectModel } from '@nestjs/mongoose';
 import { BoardArticle, BoardArticles } from '../../libs/dto/board-article/board-article';
 import { Model, ObjectId } from 'mongoose';
-import { AllBoardArticlesInquiry, BoardArticleInput, BoardArticlesInquiry } from '../../libs/dto/board-article/board-article.input';
+import {
+	AllBoardArticlesInquiry,
+	BoardArticleInput,
+	BoardArticlesInquiry,
+} from '../../libs/dto/board-article/board-article.input';
 import { Message, Direction } from '../../libs/enums/common.enum';
 import { MemberService } from '../member/member.service';
 import { BoardArticleStatus } from '../../libs/enums/board-article.enum';
@@ -11,6 +15,9 @@ import { ViewService } from '../view/view.service';
 import { ViewGroup } from '../../libs/enums/view.enum';
 import { BoardArticleUpdate } from '../../libs/dto/board-article/board-article.update';
 import { shapeIntoMongoDbObjectId, lookupMember } from '../../libs/config';
+import { LikeService } from '../like/like.service';
+import { LikeGroup } from '../../libs/enums/like.enum';
+import { LikeInput } from '../../libs/dto/like/like.input';
 
 @Injectable()
 export class BoardArticleService {
@@ -18,6 +25,7 @@ export class BoardArticleService {
 		@InjectModel('BoardArticle') private readonly boardArticleModel: Model<BoardArticle>,
 		private readonly memberService: MemberService,
 		private readonly viewService: ViewService,
+		private readonly likeService: LikeService,
 	) {}
 
 	public async createBoardArticle(memberId: ObjectId, input: BoardArticleInput): Promise<BoardArticle> {
@@ -110,6 +118,31 @@ export class BoardArticleService {
 		if (!result.length) throw new InternalServerErrorException(Message.NO_DATA_FOUND);
 		return result[0];
 	}
+
+	public async likeTargetBoardArticle(memberId: ObjectId, likeRefId: ObjectId): Promise<BoardArticle> {
+		const target: BoardArticle | null = await this.boardArticleModel
+			.findOne({ _id: likeRefId, articleStatus: BoardArticleStatus.ACTIVE })
+			.exec();
+		if (!target) throw new InternalServerErrorException(Message.NO_DATA_FOUND);
+
+		const input: LikeInput = {
+			memberId: memberId,
+			likeRefId: likeRefId,
+			likeGroup: LikeGroup.ARTICLE,
+		};
+
+		//LIKE TOGGLE via Like Modules
+		const modifier: number = await this.likeService.toggleLike(input);
+		const result = await this.boardArticleStatsEditor({
+			_id: likeRefId,
+			targetKey: 'articleLikes',
+			modifier: modifier,
+		});
+		if (!result) throw new InternalServerErrorException(Message.SOMETHING_WENT_WRONG);
+		return result;
+	}
+
+	//addmin
 
 	public async getAllBoardArticlesByAdmin(input: AllBoardArticlesInquiry): Promise<BoardArticles> {
 		const { articleStatus, articleCategory } = input.search;
