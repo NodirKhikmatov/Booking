@@ -20,6 +20,8 @@ export enum Message {
 	ONLY_SPECIFIC_ROLES_ALLOWED = 'Allowed only for members with specific roles',
 	NOT_ALLOWED_REQUEST = "NOT_ALLOWED_REQUEST",
 	REMOVE_FAILED = "REMOVE_FAILED",
+	BAD_REQUEST = "BAD_REQUEST",
+	SELF_SUBSCRIPTION_DENIED = "SELF_SUBSCRIPTION_DENIED",
 }
 
 export enum Direction {
