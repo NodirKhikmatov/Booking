@@ -1,4 +1,5 @@
 import { AuthModule } from '../auth/auth.module';
+import { LikeModule } from '../like/like.module';
 import { MemberModule } from '../member/member.module';
 import { MemberService } from '../member/member.service';
 import { Module } from '@nestjs/common';
@@ -14,6 +15,7 @@ import { ViewModule } from '../view/view.module';
 		AuthModule,
 		ViewModule,
 		MemberModule,
+		LikeModule,
 	],
 	providers: [PropertyResolver, PropertyService],
 	exports: [PropertyService],
