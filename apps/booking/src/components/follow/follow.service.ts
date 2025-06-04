@@ -5,7 +5,7 @@ import { Follower, Following, Followings, Followers } from '../../libs/dto/follo
 import { MemberService } from '../member/member.service';
 import { ObjectId } from 'mongoose';
 import { Message, Direction } from '../../libs/enums/common.enum';
-import { lookUpAuthMemberLiked, lookupFollowingData } from '../../libs/config';
+import { lookUpAuthMemberFollowed, lookUpAuthMemberLiked, lookupFollowingData } from '../../libs/config';
 import { FollowInquiry } from '../../libs/dto/follow/follow.input';
 import { T } from '../../libs/types/common';
 
@@ -78,6 +78,10 @@ export class FollowService {
 							{ $skip: (page - 1) * limit },
 							{ $limit: limit },
 							lookUpAuthMemberLiked(memberId, '$followingId'),
+							lookUpAuthMemberFollowed({
+								followerId: memberId,
+								followingId: '$followingId',
+							}),
 							lookupFollowingData,
 							{ $unwind: '$followingData' },
 						],
@@ -104,7 +108,17 @@ export class FollowService {
 				{ $sort: { createdAt: Direction.DESC } },
 				{
 					$facet: {
-						list: [{ $skip: (page - 1) * limit }, { $limit: limit }, lookupFollowingData, { $unwind: '$followerData' }],
+						list: [
+							{ $skip: (page - 1) * limit },
+							{ $limit: limit },
+							lookUpAuthMemberLiked(memberId, '$followerId'),
+							lookUpAuthMemberFollowed({
+								followerId: memberId,
+								followingId: '$followerId',
+							}),
+							lookupFollowingData,
+							{ $unwind: '$followerData' },
+						],
 						metaCounter: [{ $count: 'total' }],
 					},
 				},
