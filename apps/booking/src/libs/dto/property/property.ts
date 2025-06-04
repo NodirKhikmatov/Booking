@@ -2,6 +2,7 @@ import { Field, Int, ObjectType } from '@nestjs/graphql';
 import { Member, TotalCounter } from '../member/member';
 import { PropertyLocation, PropertyStatus, PropertyType } from '../../enums/property.enum';
 
+import { MeLiked } from '../like/like';
 import { ObjectId } from 'mongoose';
 
 @ObjectType()
@@ -79,6 +80,8 @@ export class Property {
 	updatedAt?: Date;
 
 	/* From aggregation */
+	@Field(() => [MeLiked], { nullable: true })
+	meLiked?: MeLiked[];
 
 	@Field(() => Member, { nullable: true })
 	memberData?: Member;
