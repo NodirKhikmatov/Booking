@@ -49,6 +49,15 @@ export class Property {
 	@Field(() => Int)
 	propertyRank: number;
 
+	@Field(() => String, { nullable: true })
+	propertyOffer?: string;
+
+	@Field(() => [String], { nullable: true })
+	propertyFacility?: string[];
+
+	@Field(() => Int)
+	propertyBathroom: number;
+
 	@Field(() => [String])
 	propertyImages: string[];
 
@@ -93,5 +102,5 @@ export class Properties {
 	list: Property[];
 
 	@Field(() => [TotalCounter], { nullable: true })
-	metaCounter: TotalCounter[];
+	metaCounter?: TotalCounter[];
 }

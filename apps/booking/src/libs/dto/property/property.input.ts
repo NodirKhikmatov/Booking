@@ -54,6 +54,19 @@ export class PropertyInput {
 	propertyDesc?: string;
 
 	@IsOptional()
+	@Length(3, 300)
+	@Field(() => String, { nullable: true })
+	propertyOffer?: string;
+
+	@IsNotEmpty()
+	@Field(() => Int, { nullable: true })
+	propertyBathroom?: number;
+
+	@IsNotEmpty()
+	@Field(() => [String])
+	propertyFacility: string[];
+
+	@IsOptional()
 	@Field(() => Boolean, { nullable: true })
 	propertyBarter?: boolean;
 

@@ -67,6 +67,16 @@ const PropertySchema = new Schema(
 			default: 0,
 		},
 
+		propertyFacility: {
+			type: [String],
+			default: [],
+		},
+
+		propertyBathroom: {
+			type: Number,
+			default: 0,
+		},
+
 		propertyRank: {
 			type: Number,
 			default: 0,
@@ -84,6 +94,10 @@ const PropertySchema = new Schema(
 		propertyBarter: {
 			type: Boolean,
 			default: false,
+		},
+
+		propertyOffer: {
+			type: String,
 		},
 
 		propertyRent: {
