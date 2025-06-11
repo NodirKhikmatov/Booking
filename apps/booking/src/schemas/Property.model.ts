@@ -91,7 +91,7 @@ const PropertySchema = new Schema(
 			type: String,
 		},
 
-		propertyBarter: {
+		propertyBreakfast: {
 			type: Boolean,
 			default: false,
 		},
@@ -100,7 +100,7 @@ const PropertySchema = new Schema(
 			type: String,
 		},
 
-		propertyRent: {
+		propertyCancellation: {
 			type: Boolean,
 			default: false,
 		},

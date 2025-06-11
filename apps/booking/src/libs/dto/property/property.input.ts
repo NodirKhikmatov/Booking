@@ -68,11 +68,11 @@ export class PropertyInput {
 
 	@IsOptional()
 	@Field(() => Boolean, { nullable: true })
-	propertyBarter?: boolean;
+	propertyBreakfast?: boolean;
 
 	@IsOptional()
 	@Field(() => Boolean, { nullable: true })
-	propertyRent?: boolean;
+	propertyCancellation?: boolean;
 
 	memberId?: ObjectId;
 
@@ -129,6 +129,10 @@ export class PISearch {
 	@IsOptional()
 	@Field(() => [Int], { nullable: true })
 	bedsList?: Number[];
+
+	@IsOptional()
+	@Field(() => [Int], { nullable: true })
+	bathList?: Number[];
 
 	@IsOptional()
 	@IsIn(availableOptions, { each: true })

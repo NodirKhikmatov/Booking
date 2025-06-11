@@ -65,10 +65,10 @@ export class Property {
 	propertyDesc?: string;
 
 	@Field(() => Boolean)
-	propertyBarter: boolean;
+	propertyBreakfast: boolean;
 
 	@Field(() => Boolean)
-	propertyRent: boolean;
+	propertyCancellation: boolean;
 
 	@Field(() => String)
 	memberId: ObjectId;

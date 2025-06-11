@@ -63,11 +63,11 @@ export class PropertyUpdate {
 
 	@IsOptional()
 	@Field(() => Boolean, { nullable: true })
-	propertyBarter?: boolean;
+	propertyBreakfast?: boolean;
 
 	@IsOptional()
 	@Field(() => Boolean, { nullable: true })
-	propertyRent?: boolean;
+	propertyCancellation?: boolean;
 
 	soldAt?: Date;
 	deletedAt?: Date;
