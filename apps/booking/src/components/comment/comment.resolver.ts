@@ -1,4 +1,4 @@
-import { Resolver, Mutation, Args } from '@nestjs/graphql';
+import { Resolver, Mutation, Args, Query } from '@nestjs/graphql';
 import { CommentService } from './comment.service';
 import { UseGuards } from '@nestjs/common';
 import { AuthGuard } from '../auth/guards/auth.guard';
@@ -28,7 +28,7 @@ export class CommentResolver {
 	}
 
 	@UseGuards(AuthGuard)
-	@Mutation(() => Comment)
+	@Query(() => Comment)
 	public async updateComment(
 		@Args('input') input: CommentUpdate,
 		@AuthMember('_id') memberId: ObjectId,
@@ -49,7 +49,7 @@ export class CommentResolver {
 		return await this.commentService.getComments(memberId, input);
 	}
 
-    	/* Admin */
+	/* Admin */
 	@Roles(MemberType.ADMIN)
 	@UseGuards(RolesGuard)
 	@Mutation(() => Comment)
