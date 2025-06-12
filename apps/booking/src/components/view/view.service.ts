@@ -1,13 +1,14 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { View } from '../../libs/dto/view/view';
-import { Model, ObjectId } from 'mongoose';
+import { Model } from 'mongoose';
 import { ViewInput } from '../../libs/dto/view/view.input';
 import { T } from '../../libs/types/common';
+import { ObjectId } from 'mongoose';
 import { OrdinaryInquiry } from '../../libs/dto/property/property.input';
-import { ViewGroup } from '../../libs/enums/view.enum';
 import { Properties } from '../../libs/dto/property/property';
-import { lookupVisit } from '../../libs/config';
+import { ViewGroup } from '../../libs/enums/view.enum';
+import { lookupFavorite, lookupVisit } from '../../libs/config';
 
 @Injectable()
 export class ViewService {
@@ -21,15 +22,11 @@ export class ViewService {
 		} else return null;
 	}
 
-	private async checkViewExistence(input: ViewInput): Promise<View> {
+	private async checkViewExistence(input: ViewInput): Promise<View | null> {
 		const { memberId, viewRefId } = input;
 
 		const search: T = { memberId: memberId, viewRefId: viewRefId };
-		const result = await this.viewModel.findOne(search).exec();
-		if (!result) {
-			throw new Error('View not found');
-		}
-		return result;
+		return await this.viewModel.findOne(search).exec();
 	}
 
 	public async getVisitedProperties(memberId: ObjectId, input: OrdinaryInquiry): Promise<Properties> {

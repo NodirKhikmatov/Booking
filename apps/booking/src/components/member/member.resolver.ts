@@ -165,7 +165,8 @@ export class MemberResolver {
 				});
 				if (!result) throw new Error(Message.UPLOAD_FAILED);
 
-				const uploadedImages: string[] = [];
+				const uploadedImages: String[] = [];
+				uploadedImages[index] = url;
 			} catch (err) {
 				console.log('Error, file missing!');
 			}
