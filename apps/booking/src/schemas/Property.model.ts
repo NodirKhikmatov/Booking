@@ -71,6 +71,9 @@ const PropertySchema = new Schema(
 			type: [String],
 			default: [],
 		},
+		propertyParking: {
+			type: String,
+		},
 
 		propertyBathroom: {
 			type: Number,

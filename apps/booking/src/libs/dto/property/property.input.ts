@@ -49,7 +49,7 @@ export class PropertyInput {
 	propertyImages: string[];
 
 	@IsOptional()
-	@Length(5, 500)
+	@Length(5, 800)
 	@Field(() => String, { nullable: true })
 	propertyDesc?: string;
 
@@ -62,9 +62,13 @@ export class PropertyInput {
 	@Field(() => Int, { nullable: true })
 	propertyBathroom?: number;
 
-	@IsNotEmpty()
-	@Field(() => [String])
-	propertyFacility: string[];
+	@IsOptional()
+	@Field(() => [String], { nullable: true })
+	propertyFacility?: string[];
+
+	@IsOptional()
+	@Field(() => String, { nullable: true })
+	propertyParking?: string;
 
 	@IsOptional()
 	@Field(() => Boolean, { nullable: true })

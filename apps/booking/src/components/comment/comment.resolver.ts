@@ -39,7 +39,7 @@ export class CommentResolver {
 	}
 
 	@UseGuards(WithoutGuard)
-	@Mutation(() => Comments)
+	@Query(() => Comments)
 	public async getComments(
 		@Args('input') input: CommentsInquiry,
 		@AuthMember('_id') memberId: ObjectId,

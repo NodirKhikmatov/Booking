@@ -15,6 +15,7 @@ import { getSerialForImage, shapeIntoMongoDbObjectId, validMimeTypes } from '../
 import { WithoutGuard } from '../auth/guards/without.guard';
 
 import { GraphQLUpload, FileUpload } from 'graphql-upload';
+
 import { createWriteStream } from 'fs';
 import { Message } from '../../libs/enums/common.enum';
 @Resolver()
@@ -115,8 +116,6 @@ export class MemberResolver {
 		{ createReadStream, filename, mimetype }: FileUpload,
 		@Args('target') target: String,
 	): Promise<string> {
-		console.log('Mutation: imageUploader');
-
 		if (!filename) throw new Error(Message.UPLOAD_FAILED);
 		const validMime = validMimeTypes.includes(mimetype);
 		if (!validMime) throw new Error(Message.PROVIDE_ALLOWED_FORMAT);
@@ -141,16 +140,17 @@ export class MemberResolver {
 	public async imagesUploader(
 		@Args('files', { type: () => [GraphQLUpload] })
 		files: Promise<FileUpload>[],
-		@Args('target') target: String,
+		@Args('target') target: string,
 	): Promise<string[]> {
 		console.log('Mutation: imagesUploader');
 
-		const uploadedImages = [];
+		let uploadedImages: string[] = [];
 		const promisedList = files.map(async (img: Promise<FileUpload>, index: number): Promise<Promise<void>> => {
 			try {
 				const { filename, mimetype, encoding, createReadStream } = await img;
 
 				const validMime = validMimeTypes.includes(mimetype);
+
 				if (!validMime) throw new Error(Message.PROVIDE_ALLOWED_FORMAT);
 
 				const imageName = getSerialForImage(filename);
@@ -163,10 +163,10 @@ export class MemberResolver {
 						.on('finish', () => resolve(true))
 						.on('error', () => reject(false));
 				});
+
 				if (!result) throw new Error(Message.UPLOAD_FAILED);
 
-				const uploadedImages: String[] = [];
-				uploadedImages[index] = url;
+				uploadedImages = [...uploadedImages, url];
 			} catch (err) {
 				console.log('Error, file missing!');
 			}

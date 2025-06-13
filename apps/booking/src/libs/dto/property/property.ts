@@ -52,6 +52,9 @@ export class Property {
 	@Field(() => String, { nullable: true })
 	propertyOffer?: string;
 
+	@Field(() => String, { nullable: true })
+	propertyParking?: string;
+
 	@Field(() => [String], { nullable: true })
 	propertyFacility?: string[];
 
