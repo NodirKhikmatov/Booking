@@ -149,8 +149,9 @@ export class PropertyService {
 		if (squaresRange) match.propertySquare = { $gte: squaresRange.start, $lte: squaresRange.end };
 
 		if (text) match.propertyTitle = { $regex: new RegExp(text, 'i') };
-		if (options) {
-			match['$or'] = options.map((ele) => {
+		const ft = options?.filter((itm: string) => itm !== '');
+		if (ft) {
+			match['$or'] = ft?.map((ele) => {
 				return { [ele]: true };
 			});
 		}

@@ -3,7 +3,7 @@ import { registerEnumType } from '@nestjs/graphql';
 export enum PropertyType {
 	HOTEL = 'HOTEL',
 	PENTHOUSE = 'PENTHOUSE',
-	VILA = 'VILA',
+	VILLA = 'VILLA',
 }
 registerEnumType(PropertyType, {
 	name: 'PropertyType',

@@ -41,6 +41,9 @@ const MemberSchema = new Schema(
 		memberFullName: {
 			type: String,
 		},
+		memberJob: {
+			type: String,
+		},
 		memberImage: {
 			type: String,
 			default: '',

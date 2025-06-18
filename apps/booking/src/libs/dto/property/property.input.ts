@@ -1,5 +1,5 @@
 import { Field, InputType, Int } from '@nestjs/graphql';
-import { IsIn, IsNotEmpty, IsOptional, Length, Min } from 'class-validator';
+import { IsIn, IsNotEmpty, IsOptional, Length, Min, ValidateIf } from 'class-validator';
 import { PropertyLocation, PropertyStatus, PropertyType } from '../../enums/property.enum';
 import { availableOptions, availablePropertySorts } from '../../config';
 
@@ -128,15 +128,15 @@ export class PISearch {
 
 	@IsOptional()
 	@Field(() => [Int], { nullable: true })
-	roomsList?: Number[];
+	roomsList?: number[];
 
 	@IsOptional()
 	@Field(() => [Int], { nullable: true })
-	bedsList?: Number[];
+	bedsList?: number[];
 
 	@IsOptional()
 	@Field(() => [Int], { nullable: true })
-	bathList?: Number[];
+	bathList?: number[];
 
 	@IsOptional()
 	@IsIn(availableOptions, { each: true })

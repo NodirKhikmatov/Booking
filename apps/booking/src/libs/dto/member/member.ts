@@ -30,6 +30,9 @@ export class Member {
 	@Field(() => String, { nullable: true })
 	memberFullName?: string;
 
+	@Field(() => String, { nullable: true })
+	memberJob?: string;
+
 	@Field(() => String)
 	memberImage: string;
 
