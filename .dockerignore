@@ -1,0 +1,26 @@
+# Ignore Git files
+.git
+.gitignore
+
+# Ignore node_modules (if using Node.js)
+node_modules
+
+# Ignore logs
+*.log
+logs
+npm-debug.log*
+
+# Ignore Dockerfile itself (optional)
+Dockerfile
+
+# Ignore environment files (optional)
+.env
+
+# Ignore build directories
+dist
+build
+
+# Ignore IDE/editor files
+.vscode
+.idea
+*.swp

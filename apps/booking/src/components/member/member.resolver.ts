@@ -13,7 +13,7 @@ import { RolesGuard } from '../auth/guards/roles.guard';
 import { MemberUpdate } from '../../libs/dto/member/member.update';
 import { getSerialForImage, shapeIntoMongoDbObjectId, validMimeTypes } from '../../libs/config';
 import { WithoutGuard } from '../auth/guards/without.guard';
-
+// @ts-ignore
 import { GraphQLUpload, FileUpload } from 'graphql-upload';
 
 import { createWriteStream } from 'fs';
