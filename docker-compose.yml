@@ -9,6 +9,8 @@ services:
       - '4001:3000'
     env_file:
       - .env
+    volumes:
+      - ./uploads:/app/uploads   # <-- Add this line
     networks:
       - monorepo-network
 
