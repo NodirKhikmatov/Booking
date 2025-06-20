@@ -13,9 +13,7 @@ async function bootstrap() {
 	app.enableCors({ origin: true, credentials: true });
 
 	// ✅ FIX: dynamically import graphql-upload here
-	// @ts-ignore
-	const { graphqlUploadExpress } = await import('graphql-upload');
-	
+
 	// eslint-disable-next-line @typescript-eslint/no-unsafe-call
 	app.use(graphqlUploadExpress({ maxFileSize: 15000000, maxFiles: 10 }));
 
@@ -24,3 +22,7 @@ async function bootstrap() {
 	await app.listen(process.env.PORT_API ?? 3000, '0.0.0.0');
 }
 bootstrap();
+
+function graphqlUploadExpress(arg0: { maxFileSize: number; maxFiles: number }): any {
+	throw new Error('Function not implemented.');
+}
