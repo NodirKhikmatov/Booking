@@ -5,7 +5,7 @@ import { LoggingInterceptor } from './libs/interceptor/login.interceptor';
 import { NestFactory } from '@nestjs/core';
 import { ValidationPipe } from '@nestjs/common';
 import { WsAdapter } from '@nestjs/platform-ws';
-import graphqlUploadExpress from 'graphql-upload';
+import { graphqlUploadExpress } from 'graphql-upload';
 
 async function bootstrap() {
 	const app = await NestFactory.create(AppModule);
@@ -15,7 +15,8 @@ async function bootstrap() {
 
 	// ✅ FIX: dynamically import graphql-upload here
 
-	//@ts-ignore 
+	//@ts-ignore
+	// eslint-disable-next-line @typescript-eslint/no-unsafe-call
 	app.use(graphqlUploadExpress({ maxFileSize: 15000000, maxFiles: 10 }));
 
 	app.useWebSocketAdapter(new WsAdapter(app));
