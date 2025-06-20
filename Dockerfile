@@ -29,5 +29,5 @@
     EXPOSE 3000
     
     # Run the built application
-    CMD ["node", "dist/apps/booking/main.js"]
+    CMD ["node", "dist/apps/booking/main"]
     
