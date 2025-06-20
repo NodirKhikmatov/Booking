@@ -5,7 +5,7 @@ import { LoggingInterceptor } from './libs/interceptor/login.interceptor';
 import { NestFactory } from '@nestjs/core';
 import { ValidationPipe } from '@nestjs/common';
 import { WsAdapter } from '@nestjs/platform-ws';
-import graphqlUploadExpress from 'graphql-upload/GraphQLUpload.mjs';
+import graphqlUploadExpress from 'graphql-upload';
 
 async function bootstrap() {
 	const app = await NestFactory.create(AppModule);
