@@ -18,6 +18,7 @@ import { T } from './libs/types/common';
 			playground: true,
 			uploads: false,
 			autoSchemaFile: true,
+			introspection: true, // <-- Add this line
 			formatError: (error: T) => {
 				const graphQLFormattedError = {
 					code: error?.extensions.code,
