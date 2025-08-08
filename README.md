@@ -24,7 +24,9 @@
 
 ## Description
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+Booking service built on [NestJS](https://github.com/nestjs/nest) with GraphQL, REST, WebSocket gateway, and scheduled batch jobs.
+
+- API docs: see `docs/API.md`. 
 
 ## Project setup
 
